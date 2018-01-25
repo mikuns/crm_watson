@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CRM Watson</string>
+    <string name="input_hint">enter text</string>
+</resources>
