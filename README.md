@@ -1,21 +1,8 @@
-# IBM Watson Developer Cloud Android SDK [![Build Status](https://travis-ci.org/watson-developer-cloud/android-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/android-sdk)
+# CRM 2018 World Congress Enquiry Chatbot with IBM Watson Developer Cloud Android SDK 
 
-Android client library to assist with using the [Watson Developer Cloud][wdc] services, a collection of REST
+IBM Watson Developer Cloud Android SDK: Android client library to assist with using the [Watson Developer Cloud][wdc] services, a collection of REST
 APIs and SDKs that use cognitive computing to solve complex problems.
 
-## Table of Contents
-
-  * [Installation](#installation)
-    * [Gradle](#gradle)
-  * [Usage](#usage)
-  * [Service Credentials](#service-credentials)
-    * [Getting the Credentials](#getting-the-credentials)
-    * [Adding the Credentials](#adding-the-credentials)
-  * [Questions](#questions)
-  * [Examples](#examples)
-  * [Testing](#testing)
-  * [License](#license)
-  * [Contributing](#contributing)
 
 ## Installation
 
@@ -61,20 +48,11 @@ The credentials should be added to the `example/res/values/credentials.xml` file
 
 ```xml
 <resources>
-  <!-- Paste Language Translator information here -->
-  <string name="language_translator_username"></string>
-  <string name="language_translator_password"></string>
-  <string name="language_translator_url"></string>
-
-  <!-- Paste Speech to Text information here -->
-  <string name="speech_text_username"></string>
-  <string name="speech_text_password"></string>
-  <string name="speech_text_url"></string>
-
-  <!-- Paste Text to Speech information here -->
-  <string name="text_speech_username"></string>
-  <string name="text_speech_password"></string>
-  <string name="text_speech_url"></string>
+<!-- Paste Conversation information here -->
+  <string name="conversation_username"></string>
+  <string name="conversation_password"></string>
+  <string name="conversation_url">https://gateway.watsonplatform.net/conversation/api</string>
+  <string name="conversation_workspaceId"></string>
 </resources>
 ```
 
@@ -92,94 +70,6 @@ You can also check out the [wiki][wiki] for some additional information.
 This SDK is built for use with the [java-sdk][java-sdk].
 
 The examples below are specific for Android as they use the Microphone and Speaker; for actual services refer to the [java-sdk][java-sdk]. Be sure to use the provided example app as a model for your own Android app using Watson services.
-
-### MicrophoneHelper
-
-Provides simple microphone access within an activity.
-
-```java
-MicrophoneHelper microphoneHelper = new MicrophoneHelper(this);
-```
-
-The MicrophoneHelper object allows you to create new MicrophoneInputStream objects and close them. The MicrophoneInputStream class is a convenience class for creating an `InputStream` from device microphone. You can record raw PCM data or data encoded using the ogg codec.
-
-```java
-// record PCM data without encoding
-MicrophoneInputStream myInputStream = microphoneHelper.getInputStream(false);
-
-// record PCM data and encode it with the ogg codec
-MicrophoneInputStream myOggStream = microphoneHelper.getInputStream(true);
-```
-
-An example using a Watson Developer Cloud service would look like
-
-```java
-speechService.recognizeUsingWebSocket(new MicrophoneInputStream(),
-getRecognizeOptions(), new BaseRecognizeCallback() {
-  @Override
-  public void onTranscription(SpeechResults speechResults){
-    String text = speechResults.getResults().get(0).getAlternatives().get(0).getTranscript();
-    System.out.println(text);
-  }
-
-  @Override
-  public void onError(Exception e) {
-  }
-
-  @Override public void onDisconnected() {
-  }
-
-});
-```
-
-Be sure to take a look at the example app to get a working example of putting these all together.
-
-### StreamPlayer
-
-Provides the ability to directly play an InputStream
-
-```java
-StreamPlayer player = new StreamPlayer();
-player.playStream(yourInputStream);
-```
-
-### CameraHelper
-
-Provides simple camera access within an activity.
-
-```java
-CameraHelper cameraHelper = new CameraHelper(this);
-cameraHelper.dispatchTakePictureIntent();
-
-@Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-
-    if (requestCode == CameraHelper.REQUEST_IMAGE_CAPTURE) {
-      System.out.println(cameraHelper.getFile(resultCode));
-    }
-  }
-```
-
-### GalleryHelper
-
-Like the CameraHelper, but allows for selection of images already on the device.
-
-To open the gallery:
-
-```java
-GalleryHelper galleryHelper = new GalleryHelper(this);
-galleryHelper.dispatchGalleryIntent();
-
-@Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-
-    if (requestCode == GalleryHelper.PICK_IMAGE_REQUEST) {
-      System.out.println(galleryHelper.getFile(resultCode, data));
-    }
-  }
-```
 
 ## Testing
 
