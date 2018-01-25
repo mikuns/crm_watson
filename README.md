@@ -3,6 +3,8 @@
 IBM Watson Developer Cloud Android SDK: Android client library to assist with using the [Watson Developer Cloud][wdc] services, a collection of REST
 APIs and SDKs that use cognitive computing to solve complex problems.
 
+Watson Conversation Dialog Screenshot
+https://www.ayomikunsamuel.com.ng/img/ibm22.png
 
 ## Installation
 
